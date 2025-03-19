@@ -1,0 +1,29 @@
+{
+  "name": "rails-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/rails-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["rails"],
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/rails-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "rails:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "rails:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "rails:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

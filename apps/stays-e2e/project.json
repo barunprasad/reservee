@@ -1,0 +1,29 @@
+{
+  "name": "stays-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/stays-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["stays"],
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/stays-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "stays:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "stays:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "stays:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

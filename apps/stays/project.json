@@ -1,0 +1,88 @@
+{
+  "name": "stays",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/stays/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/rspack:rspack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/stays",
+        "index": "apps/stays/src/index.html",
+        "baseHref": "/",
+        "main": "apps/stays/src/main.ts",
+        "tsConfig": "apps/stays/tsconfig.app.json",
+        "assets": ["apps/stays/src/favicon.ico", "apps/stays/src/assets"],
+        "rspackConfig": "apps/stays/rspack.config.ts",
+        "styles": ["apps/stays/src/styles.scss"],
+        "scripts": [],
+        "configurations": {
+          "development": {
+            "mode": "development"
+          },
+          "production": {
+            "mode": "production",
+            "optimization": true,
+            "sourceMap": false,
+            "outputHashing": "all",
+            "namedChunks": false,
+            "extractLicenses": true,
+            "vendorChunk": false
+          }
+        },
+        "target": "web"
+      },
+      "configurations": {
+        "production": {
+          "rspackConfig": "apps/stays/rspack.config.prod.ts"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/rspack:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "stays:build",
+        "hmr": true,
+        "port": 4203
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "stays:build:development"
+        },
+        "production": {
+          "buildTarget": "stays:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "serve-static": {
+      "executor": "@nx/rspack:module-federation-static-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "serveTarget": "stays:serve"
+      },
+      "configurations": {
+        "development": {
+          "serveTarget": "stays:serve:development"
+        },
+        "production": {
+          "serveTarget": "stays:serve:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/stays/jest.config.ts"
+      }
+    }
+  }
+}

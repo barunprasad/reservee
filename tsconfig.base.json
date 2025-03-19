@@ -1,0 +1,28 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "auth/Module": ["apps/auth/src/remote-entry.ts"],
+      "bus/Module": ["apps/bus/src/remote-entry.ts"],
+      "flights/Module": ["apps/flights/src/remote-entry.ts"],
+      "profile/Module": ["apps/profile/src/remote-entry.ts"],
+      "rails/Module": ["apps/rails/src/remote-entry.ts"],
+      "rides/Module": ["apps/rides/src/remote-entry.ts"],
+      "stays/Module": ["apps/stays/src/remote-entry.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
